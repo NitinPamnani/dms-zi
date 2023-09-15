@@ -1,0 +1,21 @@
+{
+  "name": "dms-zi",
+  "version": "1.0.0",
+  "description": "\"Document management system\"",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@personal-github.com:NitinPamnani/dms-zi.git"
+  },
+  "author": "Nitin Pamnani",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^6.1.0",
+    "uuid": "^9.0.1"
+  }
+}

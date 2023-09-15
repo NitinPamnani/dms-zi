@@ -1,0 +1,12 @@
+export default  {
+    database:{
+        host:"<host_url>",
+        username:"<db user>",
+        password:"<db password>",
+        database:"<db name>"
+    },
+
+    application:{
+        port: 5001
+    }
+}

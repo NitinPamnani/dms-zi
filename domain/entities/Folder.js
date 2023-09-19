@@ -3,19 +3,15 @@ export default class Folder {
     #name;
     #type;
     #created_at;
-    #children_dir;
-    #children_files;
     #modified_at;
     #owner_id;
     #parent_dir;
 
-    constructor(id, name, type, created_at, children_dir, children_files, modified_at, owner_id, parent_dir) {
+    constructor(id, name, type, created_at, modified_at, owner_id, parent_dir) {
         this.#id = id;
         this.#name = name;
         this.#type = type;
         this.#created_at = created_at;
-        this.#children_dir = children_dir;
-        this.#children_files = children_files;
         this.#modified_at = modified_at;
         this.#owner_id = owner_id;
         this.#parent_dir = parent_dir;
@@ -50,14 +46,6 @@ export default class Folder {
 
     getParentDir() {
         return this.#parent_dir;
-    }
-
-    getChildDirectoryIds() {
-        return this.#children_dir;
-    }
-
-    getChildFileIds() {
-        return this.#children_files;
     }
 
     getDirectoryType() {

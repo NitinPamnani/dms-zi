@@ -59,6 +59,7 @@ export default class File {
 
     getFileDetails() {
         return {
+            fileId : this.#id,
             name : this.#name,
             content : this.#content,
             created_at : this.#created_at,

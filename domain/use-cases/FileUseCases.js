@@ -1,22 +1,37 @@
-import {File} from "../entities/File.js";
+import File from "../entities/File.js";
 import {v4 as uuid} from 'uuid';
+import * as db from '../../adapters/db_connectors/mongo/db.js'
 
 
 
 async function createNewFile(name, content, context) {
 
-    let curr_date = new Date();
-    let current_dir = context.body.current_dir;
-    let owner_id = context.body.owner_id;
+    let currDate = new Date();
+    let currentDir =22 //context.body.current_dir;
+    let ownerId =22 //context.body.owner_id;
     let id = uuid();
-    let new_file = new File(id,name, content, curr_date, curr_date, owner_id, current_dir);
-
+    let newFile = new File(id,name, content, currDate, currDate, ownerId, currentDir);
+    const fileDetails = newFile.getFileDetails()
+    const res =  await db.fileRepo.createNewFile(fileDetails);  
+    return res;
 }
 
-async function moveFile(currentDir, newDir) {
-
+async function updateFile(context) {
+    
+    const res = await db.fileRepo.updateFile(context);
+    return res;
 }
 
-async function getFileContents(fileId) {
+async function getFileContents(context) {
 
+        const query = {fileId: context.fileId, owner_id: context.ownerId}
+
+        const fileData = await db.fileRepo.getFileContents(query);
+        return fileData
+}
+
+export {
+    createNewFile,
+    updateFile,
+    getFileContents
 }

@@ -14,7 +14,10 @@
   "author": "Nitin Pamnani",
   "license": "ISC",
   "dependencies": {
+    "@grpc/grpc-js": "^1.9.3",
+    "@grpc/proto-loader": "^0.7.9",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.1.0",
     "uuid": "^9.0.1"
   }

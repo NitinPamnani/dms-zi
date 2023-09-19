@@ -4,13 +4,11 @@ import * as db from '../../adapters/db_connectors/mongo/db.js'
 
 
 
-async function createNewFile(name, content, context) {
+async function createNewFile(context) {
 
     let currDate = new Date();
-    let currentDir =22 //context.body.current_dir;
-    let ownerId =22 //context.body.owner_id;
     let id = uuid();
-    let newFile = new File(id,name, content, currDate, currDate, ownerId, currentDir);
+    let newFile = new File(id,context.name, context.content, currDate, currDate, context.ownerId, context.parentDir);
     const fileDetails = newFile.getFileDetails()
     const res =  await db.fileRepo.createNewFile(fileDetails);  
     return res;

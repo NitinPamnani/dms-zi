@@ -97,12 +97,57 @@ export default class ServiceBinding {
                 }
             },
 
-            createFile: (call, callback) => {
+            createFile: async (call, callback) => {
+              let {name, content, parentDirId, token} = call.request;
+              console.log(token);
+              const tokenPayload = await this.#validateJWT(token);
+              if(tokenPayload.success) {
+                  const userData = tokenPayload.data;
+                  const ownerId = userData.userId;
+                  const context = {
+                      name: name,
+                      ownerId: ownerId,
+                      parentDir: parentDirId,
+                      content:content
+                  }
 
+                  const res = await fileUseCases.createNewFile(context);
+
+                  if(res.success) {
+                      callback(null, {success:1, ...res.data})
+                  } else {
+                      callback({success:0}, null)
+                  }
+                  
+              } else {
+                  callback({success:0, err:tokenPayload.err}, null);
+              }                  
             },
 
-            createDirectory: (call, callback) => {
-
+            createDirectory: async (call, callback) => {
+                let {name, parentDirId, token} = call.request;
+                console.log(token);
+                const tokenPayload = await this.#validateJWT(token);
+                if(tokenPayload.success) {
+                    const userData = tokenPayload.data;
+                    const ownerId = userData.userId;
+                    const context = {
+                        name: name,
+                        ownerId: ownerId,
+                        parentDir: parentDirId,
+                    }
+  
+                    const res = await folderUseCases.createDirectory(context);
+  
+                    if(res.success) {
+                        callback(null, {success:1, ...res.data})
+                    } else {
+                        callback({success:0}, null)
+                    }
+                    
+                } else {
+                    callback({success:0, err:tokenPayload.err}, null);
+                }  
             },
 
             getFileContents : async (call, callback) => {

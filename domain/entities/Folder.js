@@ -51,4 +51,16 @@ export default class Folder {
     getDirectoryType() {
         return this.#type
     }
+
+    getFolderDetails() {
+        return {
+            directoryId : this.#id,
+            type: this.#type,
+            name : this.#name,
+            created_at : this.#created_at,
+            modified_at : this.#modified_at,
+            owner_id : this.#owner_id,
+            parent_dir_id : this.#parent_dir
+        }
+    }
 }

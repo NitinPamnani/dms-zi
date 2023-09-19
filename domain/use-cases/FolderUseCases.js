@@ -3,8 +3,13 @@ import {v4 as uuid} from 'uuid';
 import * as db from '../../adapters/db_connectors/mongo/db.js';
 
 
-async function createDirectory() {
-
+async function createDirectory(context) {
+    let currDate = new Date();
+    let id = uuid();
+    let newDir = new Folder(id,context.name, context.type || "SUB" , currDate, currDate, context.ownerId, context.parentDir);
+    const dirDetails = newDir.getFolderDetails()
+    const res =  await db.dirRepo.createNewDirectory(dirDetails);  
+    return res;
 }
 
 
@@ -47,5 +52,6 @@ async function getDirectoryContents(context) {
 
 
 export {
-    getDirectoryContents
+    getDirectoryContents,
+    createDirectory
 }
